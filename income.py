@@ -1,8 +1,7 @@
 """
 Calculate hourly, monthly, or yearly pay,
 as well as the highest income of affordable rent possible.
-There's also the option to subtract taxes, tuition payments,
-and other expenses.
+There's also the option to subtract taxes and other expenses.
 """
 
 from math import ceil
@@ -10,7 +9,7 @@ from re import sub
 
 
 def get_income():
-    """Get an hourly, monthly, or yearly income as a dollar amount."""
+    """Get hourly, monthly, or yearly income as a dollar amount."""
 
     income = -1.0
     while income < 0:
@@ -18,7 +17,11 @@ def get_income():
         income = input(prompt)
         income = sub("[^0-9.]", "", income)
 
-        if income.count('.') <= 1 and income.replace('.', '').isdigit():
+        if not income:
+            print("Income = $0.")
+            income = 0.0
+
+        elif income.count('.') <= 1 and income.replace('.', '').isdigit():
             income = float(income)
             income = round(income, 2)
 
